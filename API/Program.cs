@@ -1,15 +1,9 @@
-using API.Data;
-using API.Data.IRepository;
-using API.Data.Repository;
-using Microsoft.EntityFrameworkCore;
+using API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-builder.Services.AddDbContext<DataContext>(
-    options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddCors();
 
 var app = builder.Build();
