@@ -1,5 +1,4 @@
-
-namespace API.Data.IRepository
+namespace API.Repository.Interfaces
 {
     public interface IUnitOfWork
     {

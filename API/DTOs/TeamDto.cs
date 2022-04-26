@@ -1,13 +1,8 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace API.Entities
+namespace API.DTOs
 {
-    [Table("Teams")]
-    public class Team
+    public class TeamDto
     {
         public int Id { get; set; }
-        [Required]
         public string? TeamName { get; set; }
         public string? ShortName { get; set; }
         public string? Owner { get; set; }
@@ -15,6 +10,6 @@ namespace API.Entities
         public string? Coach { get; set; }
         public string? Captain { get; set; }
         public int Year { get; set; }
-        public TeamLogo? Logo { get; set; }
+        public TeamLogoDto? Logo { get; set; }
     }
 }

@@ -1,23 +1,22 @@
 using System.Linq.Expressions;
-using API.Data.IRepository;
+using API.Data;
+using API.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Data.Repository
+namespace API.Repository.Implementation
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private readonly DataContext _db;
         internal DbSet<T> _dbSet;
         public Repository(DataContext db)
         {
-            _db = db;
-            _dbSet = _db.Set<T>();
+            _dbSet = db.Set<T>();
         }
         public void Add(T entity)
         {
             _dbSet.Add(entity);
         }
-        public async Task<IEnumerable<T>> GetAll(string? includeroperties = null)
+        public async Task<IEnumerable<T>> GetAllAsync(string? includeroperties = null)
         {
             IQueryable<T> query = _dbSet;
             if (includeroperties != null)
@@ -29,7 +28,7 @@ namespace API.Data.Repository
             }
             return await query.ToListAsync();
         }
-        public async Task<T?> GetFirstOrDefault(Expression<Func<T, bool>> filter, string? includeroperties = null)
+        public async Task<T?> GetFirstOrDefaultAsync(Expression<Func<T, bool>> filter, string? includeroperties = null)
         {
             IQueryable<T> query = _dbSet.Where(filter);
             if (includeroperties != null)

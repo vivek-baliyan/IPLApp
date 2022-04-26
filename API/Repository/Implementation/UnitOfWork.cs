@@ -1,7 +1,7 @@
+using API.Data;
+using API.Repository.Interfaces;
 
-using API.Data.IRepository;
-
-namespace API.Data.Repository
+namespace API.Repository.Implementation
 {
     public class UnitOfWork : IUnitOfWork
     {
@@ -12,7 +12,7 @@ namespace API.Data.Repository
             _db = db;
             Teams = new TeamRepository(_db);
         }
-        public ITeamRepository Teams {get; private set;}
+        public ITeamRepository Teams { get; private set; }
         public async Task<bool> Save()
         {
             return await _db.SaveChangesAsync() > 0;
