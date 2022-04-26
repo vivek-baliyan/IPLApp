@@ -29,7 +29,7 @@ export class PhotoEditorComponent implements OnInit {
 
   initializeUploader() {
     this.uploader = new FileUploader({
-      url: this.baseUrl + 'teams/add-photo',
+      url: this.baseUrl + `teams/add-photo?teamId=${this.team.id}`,
       authToken: '',
       isHTML5: true,
       allowedFileType: ['image'],

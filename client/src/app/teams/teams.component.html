@@ -1,12 +1,14 @@
-<div class="row">
-    <div class="col-12 text-end">
-        <a routerLink="/add-team" class="btn btn-primary">+ New</a>
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-end">
+            <a routerLink="/add-team" class="btn btn-primary">+ New</a>
+        </div>
     </div>
-    <div class="col-12">
-        <ul>
-            <li *ngFor="let team of teams">{{team.name}}</li>
-        </ul>
+    <div class="row text-center">
+        <div class="col-md-4 col-lg-3" *ngFor="let team of teams">
+            <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="{{team.logo?.url}}">
+            <h4>{{team.teamName}}</h4>
+            <p><a class="btn btn-secondary" routerLink="/edit-team/{{team.id}}">View details »</a></p>
+        </div>
     </div>
-    
 </div>
-

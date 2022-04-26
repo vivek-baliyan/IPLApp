@@ -1,11 +1,14 @@
 <main>
     <div class="row g-5">
-        <!-- <div class="col-md-5 col-lg-4 order-md-last">
-            <app-photo-editor [team]=""></app-photo-editor>
-        </div> -->
+        <div class="col-md-1 col-lg-1">
+            <a routerLink="/teams">Back</a>
+        </div>
+        <div class="col-md-4 col-lg-3" *ngIf="isEditMode">
+            <app-photo-editor [team]="team"></app-photo-editor>
+        </div>
         <div class="col-md-7 col-lg-8 mx-auto">
-            <h4 class="mb-3">Add Team</h4>
-            <form [formGroup]="addTeamForm" (ngSubmit)="addTeamForm.valid && saveTeam()">
+            <h4 class="mb-3">{{isEditMode ? "Edit" : "Add"}} Team</h4>
+            <form [formGroup]="addTeamForm" (ngSubmit)="addTeamForm.valid && isEditMode ? updateTeam() : saveTeam()">
                 <div class="row g-3">
                     <div class="col-sm-8">
                         <label class="form-label">Team Name</label>
@@ -37,7 +40,7 @@
                         <app-text-inputs [formControl]='addTeamForm.controls["captain"]' [label]='"Captain"'>
                         </app-text-inputs>
                     </div>
-                    
+
                     <!-- <div class="col-md-5">
                         <label for="country" class="form-label">Country</label>
                         <select class="form-select" id="country" required="">
@@ -60,8 +63,8 @@
                     <label class="form-check-label" for="save-info">Save this information for next time</label>
                 </div> -->
                 <hr class="my-4">
-
-                <button class="w-100 btn btn-primary btn-lg" type="submit">Continue</button>
+                <button class="btn btn-primary btn-lg" type="submit">{{isEditMode ? "Update" : "Save"}}</button>
+                <button class="btn btn-danger btn-lg" type="button" (click)="deleteTeam(team.id)" *ngIf="isEditMode">Delete</button>
             </form>
         </div>
     </div>

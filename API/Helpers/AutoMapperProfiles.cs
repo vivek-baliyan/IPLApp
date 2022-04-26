@@ -10,6 +10,7 @@ namespace API.Helpers
         {
             CreateMap<Team, TeamDto>();
             CreateMap<TeamLogo, TeamLogoDto>();
+            CreateMap<TeamDto, Team>();
         }
     }
 }

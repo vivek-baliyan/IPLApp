@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Team } from '../_models/Team';
 import { TeamsService } from '../_services/teams.service';
 
 @Component({
@@ -12,15 +14,32 @@ export class AddTeamComponent implements OnInit {
   addTeamForm: FormGroup;
   maxDate: Date;
   validationErrors: string[] = [];
+  team: Team;
+  isEditMode = false;
 
-  constructor(private teams: TeamsService, private fb: FormBuilder) {}
+  constructor(
+    private teams: TeamsService,
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.initializeForm();
+    this.route.data.subscribe((data) => {
+      this.isEditMode = false;
+      if (data.team) {
+        this.team = data.team;
+        this.addTeamForm.patchValue(data.team);
+        this.isEditMode = true;
+      }
+    });
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   initializeForm() {
     this.addTeamForm = this.fb.group({
+      id: [0],
       teamName: ['', Validators.required],
       shortName: ['', Validators.required],
       owner: ['', Validators.required],
@@ -33,11 +52,32 @@ export class AddTeamComponent implements OnInit {
   saveTeam() {
     this.teams.saveTeam(this.addTeamForm.value).subscribe({
       next: (response) => {
-        // this.router.navigateByUrl('/members');
-        console.log(response);
+        this.router.navigateByUrl('/teams');
       },
       error: (error) => {
-        this.validationErrors = error;
+        console.log(error);
+      },
+    });
+  }
+
+  updateTeam() {
+    this.teams.updateTeam(this.addTeamForm.value).subscribe({
+      next: (response) => {
+        this.router.navigateByUrl('/teams');
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+
+  deleteTeam(id: number) {
+    this.teams.deleteTeam(id).subscribe({
+      next: (response) => {
+        this.router.navigateByUrl('/teams');
+      },
+      error: (error) => {
+        console.log(error);
       },
     });
   }
