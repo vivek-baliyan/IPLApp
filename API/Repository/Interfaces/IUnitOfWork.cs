@@ -2,7 +2,8 @@ namespace API.Repository.Interfaces
 {
     public interface IUnitOfWork
     {
-        ITeamRepository Teams { get; }
+        ITeamRepository TeamRepository { get; }
+        IMatchRepository MatchRepository { get; }
         Task<bool> Save();
     }
 }

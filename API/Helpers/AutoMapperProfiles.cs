@@ -11,6 +11,8 @@ namespace API.Helpers
             CreateMap<Team, TeamDto>();
             CreateMap<TeamLogo, TeamLogoDto>();
             CreateMap<TeamDto, Team>();
+            CreateMap<Match, MatchDto>();
+            CreateMap<MatchDetails, MatchDetailsDto>();
         }
     }
 }
