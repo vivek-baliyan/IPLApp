@@ -16,6 +16,8 @@ import { AddTeamComponent } from './add-team/add-team.component';
 import { TextInputsComponent } from './_forms/text-inputs/text-inputs.component';
 import { PhotoEditorComponent } from './photo-editor/photo-editor.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { faArrowLeftLong, faTrashCan, faCircle } from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
   declarations: [
@@ -37,8 +39,15 @@ import { FileUploadModule } from 'ng2-file-upload';
     CommonModule,
     CarouselModule.forRoot(),
     FileUploadModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private library: FaIconLibrary){
+    library.addIcons(faArrowLeftLong);
+    library.addIcons(faTrashCan);
+    library.addIcons(faCircle);
+  }
+}

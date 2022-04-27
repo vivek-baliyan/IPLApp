@@ -1,3 +1,30 @@
 .dv-upload button{
     margin-right: 2px;
 }
+
+img.img-thumbnail {
+    height: 176px;
+    min-width: 176px !important;
+    margin-bottom: 2px;
+    border: none;
+  }
+  
+  .nv-file-over {
+    border: dotted 3.2px red;
+  }
+  
+  input[type="file"] {
+    color: transparent;
+  }
+  
+  .not-approved {
+    opacity: 0.2;
+  }
+  .img-wrapper {
+    position: relative;
+  }
+  .img-text {
+    position: absolute;
+    bottom: 30%;
+  }
+  

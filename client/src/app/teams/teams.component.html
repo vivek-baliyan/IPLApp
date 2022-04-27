@@ -1,12 +1,25 @@
-<div class="row">
-    <div class="col-12 text-end">
-        <a routerLink="/add-team" class="btn btn-primary">+ New</a>
+<div class="container">
+    <div class="row text-center">
+        <div class="col-md-4 col-lg-3 mb-3" *ngFor="let team of teams">
+            <div class="border rounded py-1">
+                <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="{{team.logo?.url}}">
+                <h3>{{team.teamName}}</h3>
+                <p>{{team.venue}}</p>
+                <p><a class="btn btn-dark" routerLink="/edit-team/{{team.id}}">View details »</a></p>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-3">
+            <div class="border rounded py-1">
+                <svg class="bd-placeholder-img rounded-circle" width="140" height="140"
+                    xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140"
+                    preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <title>Placeholder</title>
+                    <rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777"
+                        dy=".3em">140x140</text>
+                </svg>
+                <h4>Add New</h4>
+                <p><a class="btn btn-dark" routerLink="/add-team">Add New »</a></p>
+            </div>
+        </div>
     </div>
-    <div class="col-12">
-        <ul>
-            <li *ngFor="let team of teams">{{team.name}}</li>
-        </ul>
-    </div>
-    
 </div>
-
